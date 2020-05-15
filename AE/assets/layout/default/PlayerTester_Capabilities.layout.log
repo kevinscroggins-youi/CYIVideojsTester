@@ -1,0 +1,118 @@
+activecomp {
+  name: "PlayerTester_Capabilities"
+  width: 150
+  height: 300
+  defaultcameradistance: 208.33333
+  layer {
+    name: "Surface capabilities"
+    id: 717
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 74.939896
+        y: 18.000002
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_CENTER
+      fontSize: 18
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      isLabel: true
+      text: "Surface capabilities"
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  layer {
+    name: "placeholder-text"
+    id: 718
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 14
+        y: 47
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 14
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+}
+sources {
+  uid: 1
+  srctype: AE_FONT_SRC
+  name: "CabinCondensed-Medium"
+  copy_source: true
+  file_name: "yi_Cabin Condensed-Medium.ttf"
+  style_name: "Medium"
+}

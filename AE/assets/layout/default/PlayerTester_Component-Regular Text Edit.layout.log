@@ -1,0 +1,225 @@
+activecomp {
+  name: "PlayerTester_Component-Regular Text Edit"
+  width: 350
+  height: 60
+  defaultcameradistance: 486.11111
+  layer {
+    name: "Purple Solid 2"
+    id: 259506
+    sourceid: 259589
+    transform {
+      anchorPoint {
+        x: 180
+        y: 35
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 175
+        y: 30
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "InputProperties"
+    id: 259507
+    sourceid: 4650
+    transform {
+      anchorPoint {
+        x: 25
+        y: 72.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 297.84836
+        y: -5.3947754
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 259509
+  }
+  layer {
+    name: "Text-BG"
+    id: 259508
+    sourceid: 259135
+    transform {
+      anchorPoint {
+        x: 175
+        y: 30
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 175
+        y: 29.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Text"
+    id: 259509
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 17.151642
+        y: 41.782837
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 36
+      fontColor {
+        alpha: 1
+        red: 0.58432000875473022
+        green: 0.59216004610061646
+        blue: 0.5882299542427063
+      }
+      fontName: "ArialMT"
+      isPointText: true
+      isLabel: true
+      text: "Default Text"
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  classname: "CYITextEditView"
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  properties {
+    key: "input_type"
+    value: "email"
+  }
+  properties {
+    key: "componentType"
+    value: "input"
+  }
+  properties {
+    key: "componentSubtype"
+    value: "regular"
+  }
+}
+sources {
+  uid: 259589
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.68235301971435547
+    green: 0
+    blue: 1
+  }
+  width: 360
+  height: 70
+  copy_source: false
+}
+sources {
+  uid: 4650
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.58431375026702881
+    green: 0.59215688705444336
+    blue: 0.58823531866073608
+  }
+  width: 50
+  height: 145
+  copy_source: false
+}
+sources {
+  uid: 259135
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  width: 350
+  height: 60
+  copy_source: false
+}
+sources {
+  uid: 4
+  srctype: AE_FONT_SRC
+  name: "ArialMT"
+  copy_source: true
+  file_name: "yi_Arial-Regular.ttf"
+  style_name: "Regular"
+}

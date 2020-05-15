@@ -1,0 +1,297 @@
+activecomp {
+  name: "PlayerTester_Button"
+  width: 60
+  height: 30
+  defaultcameradistance: 83.333336
+  layer {
+    name: "Deep Turquoise Solid 2"
+    id: 622
+    sourceid: 633
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "background"
+      value: "true"
+    }
+  }
+  layer {
+    name: "Blue Solid 1"
+    id: 623
+    sourceid: 658
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "background"
+      value: "true"
+    }
+  }
+  layer {
+    name: "Dark Gray Solid 1"
+    id: 624
+    sourceid: 713
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "background"
+      value: "true"
+    }
+  }
+  layer {
+    name: "placeholder-Text"
+    id: 625
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 11.448111
+        y: 23.28
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 14
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  layer {
+    name: "Black Solid 2"
+    id: 626
+    sourceid: 636
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "background"
+      value: "true"
+    }
+  }
+  classname: "CYIPushButtonView"
+  bgcolor {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  properties {
+    key: "layout"
+    value: "CYIStackLayout"
+  }
+  properties {
+    key: "width"
+    value: "fit-content"
+  }
+  properties {
+    key: "gravity"
+    value: "center"
+  }
+  properties {
+    key: "padding"
+    value: "20"
+  }
+  properties {
+    key: "componentType"
+    value: "button"
+  }
+  properties {
+    key: "componentSubtype"
+    value: "push"
+  }
+}
+sources {
+  uid: 633
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.0743890032172203
+    green: 0.5663139820098877
+    blue: 0.2784389853477478
+  }
+  width: 60
+  height: 30
+  copy_source: false
+}
+sources {
+  uid: 658
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.1590886265039444
+    green: 0.27108073234558105
+    blue: 0.90661764144897461
+  }
+  width: 60
+  height: 30
+  copy_source: false
+}
+sources {
+  uid: 713
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.34160539507865906
+    green: 0.34160539507865906
+    blue: 0.34160539507865906
+  }
+  width: 60
+  height: 30
+  copy_source: false
+}
+sources {
+  uid: 4
+  srctype: AE_FONT_SRC
+  name: "CabinCondensed-Medium"
+  copy_source: true
+  file_name: "yi_Cabin Condensed-Medium.ttf"
+  style_name: "Medium"
+}
+sources {
+  uid: 636
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  width: 60
+  height: 30
+  copy_source: false
+}

@@ -1,0 +1,36 @@
+tracks {
+  binding: IS_VISIBLE
+  targetid: 860
+  targetname: "ForwardButtons"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+}
+tracks {
+  binding: IS_VISIBLE
+  targetid: 861
+  targetname: "ReverseButtons"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+}
+markers {
+  starttime: 0.10001668
+  duration: 0.1
+  name: "In"
+  alltracks: false
+  looping: false
+}
+markers {
+  starttime: 0.266016
+  duration: 0.3
+  name: "Loop"
+  alltracks: false
+  looping: false
+}

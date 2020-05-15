@@ -1,0 +1,114 @@
+activecomp {
+  name: "PlayerTester_SeekControls"
+  width: 350
+  height: 263
+  defaultcameradistance: 486.11111
+  layer {
+    name: "ForwardButtons"
+    id: 860
+    sourceid: 259719
+    transform {
+      anchorPoint {
+        x: 65
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 272
+        y: 226.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "item-gravity"
+      value: "right-bottom"
+    }
+  }
+  layer {
+    name: "ReverseButtons"
+    id: 861
+    sourceid: 259692
+    transform {
+      anchorPoint {
+        x: 65
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 91
+        y: 227.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "item-gravity"
+      value: "bottom-left"
+    }
+  }
+  bgcolor {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  properties {
+    key: "layout"
+    value: "CYIStackLayout"
+  }
+  properties {
+    key: "padding"
+    value: "20"
+  }
+  childtemplates: "PlayerTester_ForwardButtons"
+  childtemplates: "PlayerTester_ReverseButtons"
+}
+sources {
+  uid: 259719
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_ForwardButtons.layout"
+  width: 130
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 259692
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_ReverseButtons.layout"
+  width: 130
+  height: 30
+  copy_source: true
+}

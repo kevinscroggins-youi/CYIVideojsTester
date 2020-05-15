@@ -1,0 +1,28 @@
+tracks {
+  binding: IS_VISIBLE
+  targetid: 259536
+  targetname: "SeekButton"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+}
+tracks {
+  binding: IS_VISIBLE
+  targetid: 259537
+  targetname: "SeekTextEdit"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 30
+    inttype: AE_INTERP_HOLD
+    ivalue1: 0
+  }
+}

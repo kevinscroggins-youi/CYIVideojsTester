@@ -1,0 +1,114 @@
+activecomp {
+  name: "PlayerTester_VideoControls 2"
+  width: 640
+  height: 75
+  defaultcameradistance: 888.88892
+  layer {
+    name: "UserAgent"
+    id: 788
+    sourceid: 259749
+    transform {
+      anchorPoint {
+        x: 100
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 80
+        y: 54.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Set User Agent"
+    }
+  }
+  layer {
+    name: "StartSmallButton"
+    id: 789
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 34
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 79.53334
+        y: 36.666672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Start Low Res"
+    }
+  }
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  properties {
+    key: "layout"
+    value: "CYIColumnLayout"
+  }
+  properties {
+    key: "gravity"
+    value: "left"
+  }
+  childtemplates: "PlayerTester_UserAgent"
+  childtemplates: "PlayerTester_Button"
+}
+sources {
+  uid: 259749
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_UserAgent.layout"
+  width: 200
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 622
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Button.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}

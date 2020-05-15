@@ -1,0 +1,221 @@
+activecomp {
+  name: "PlayerTester_UserAgentTextEdit"
+  width: 200
+  height: 30
+  defaultcameradistance: 277.77777
+  layer {
+    name: "Purple Solid 1"
+    id: 259777
+    sourceid: 259550
+    transform {
+      anchorPoint {
+        x: 35
+        y: 20
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "InputProperties"
+    id: 259778
+    sourceid: 4650
+    transform {
+      anchorPoint {
+        x: 25
+        y: 72.5
+        z: 0
+      }
+      scale {
+        x: 0.72
+        y: 0.2
+        z: 1
+      }
+      position {
+        x: 216.84836
+        y: -14.394775
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 259780
+  }
+  layer {
+    name: "Text-BG"
+    id: 259779
+    sourceid: 259135
+    transform {
+      anchorPoint {
+        x: 175
+        y: 30
+        z: 0
+      }
+      scale {
+        x: 0.57142854
+        y: 0.6
+        z: 1
+      }
+      position {
+        x: 100
+        y: 14.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Text"
+    id: 259780
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: -1.8483582
+        y: 28.782837
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 36
+      fontColor {
+        alpha: 1
+        red: 0.58432000875473022
+        green: 0.59216004610061646
+        blue: 0.5882299542427063
+      }
+      fontName: "ArialMT"
+      isPointText: true
+      isLabel: true
+      text: "PlayerTester/..."
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  classname: "CYITextEditView"
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  properties {
+    key: "componentType"
+    value: "input"
+  }
+  properties {
+    key: "componentSubtype"
+    value: "regular"
+  }
+}
+sources {
+  uid: 259550
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.68235319852828979
+    green: 0
+    blue: 1
+  }
+  width: 70
+  height: 40
+  copy_source: false
+}
+sources {
+  uid: 4650
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.58431375026702881
+    green: 0.59215688705444336
+    blue: 0.58823531866073608
+  }
+  width: 50
+  height: 145
+  copy_source: false
+}
+sources {
+  uid: 259135
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  width: 350
+  height: 60
+  copy_source: false
+}
+sources {
+  uid: 4
+  srctype: AE_FONT_SRC
+  name: "ArialMT"
+  copy_source: true
+  file_name: "yi_Arial-Regular.ttf"
+  style_name: "Regular"
+}

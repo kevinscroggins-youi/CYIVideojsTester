@@ -1,0 +1,56 @@
+tracks {
+  binding: IS_VISIBLE
+  targetid: 813
+  targetname: "placeholder-format"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 30
+    inttype: AE_INTERP_HOLD
+    ivalue1: 0
+  }
+}
+tracks {
+  binding: IS_VISIBLE
+  targetid: 814
+  targetname: "placeholder-url"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 30
+    inttype: AE_INTERP_HOLD
+    ivalue1: 0
+  }
+}
+tracks {
+  binding: IS_VISIBLE
+  targetid: 815
+  targetname: "Video URL/Format:"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+}
+tracks {
+  binding: IS_VISIBLE
+  targetid: 816
+  targetname: "ChangeURLButton"
+  keytimes {
+    datatype: AE_INT_DATA
+    timeOffset: 0
+    inttype: AE_INTERP_HOLD
+    ivalue1: 1
+  }
+}

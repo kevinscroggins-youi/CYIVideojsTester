@@ -1,0 +1,295 @@
+activecomp {
+  name: "PlayerTester_VideoControls"
+  width: 640
+  height: 75
+  defaultcameradistance: 888.88892
+  layer {
+    name: "MiniButton"
+    id: 660
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 261
+        y: 373
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Switch Mini"
+    }
+  }
+  layer {
+    name: "HideCCButton"
+    id: 661
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 487.53333
+        y: 35.166672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "CC Off"
+    }
+  }
+  layer {
+    name: "ShowCCButton"
+    id: 662
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 487.53333
+        y: 35.166672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "CC On"
+    }
+  }
+  layer {
+    name: "StopButton"
+    id: 663
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 487.53333
+        y: 35.166672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Stop"
+    }
+  }
+  layer {
+    name: "PauseButton"
+    id: 664
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 487.53333
+        y: 35.166672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Pause"
+    }
+  }
+  layer {
+    name: "PlayButton"
+    id: 665
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 379.53333
+        y: 37.166672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Play"
+    }
+  }
+  layer {
+    name: "StartButton"
+    id: 666
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 144.53334
+        y: 38.166672
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Start"
+    }
+  }
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  properties {
+    key: "layout"
+    value: "CYIRowLayout"
+  }
+  properties {
+    key: "gravity"
+    value: "left"
+  }
+  childtemplates: "PlayerTester_Button"
+}
+sources {
+  uid: 622
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Button.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}

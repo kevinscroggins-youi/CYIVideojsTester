@@ -1,0 +1,275 @@
+activecomp {
+  name: "PlayerTester_Buffering"
+  width: 350
+  height: 263
+  defaultcameradistance: 486.11111
+  layer {
+    name: "Black Solid 1"
+    id: 599
+    sourceid: 611
+    transform {
+      anchorPoint {
+        x: 320
+        y: 240
+        z: 0
+      }
+      scale {
+        x: 0.54375
+        y: 0.54166669
+        z: 1
+      }
+      position {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Buffering"
+    id: 600
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 127.53294
+        y: 71.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 24
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      isLabel: true
+      text: "Buffering"
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  layer {
+    name: "."
+    id: 601
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 101.53373
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 24
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      isLabel: true
+      text: "."
+      multiline: false
+      isAllCaps: false
+    }
+    parentid: 600
+  }
+  layer {
+    name: ". 2"
+    id: 602
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 92.700394
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 24
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      isLabel: true
+      text: "."
+      multiline: false
+      isAllCaps: false
+    }
+    parentid: 600
+  }
+  layer {
+    name: ". 3"
+    id: 603
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 84.867058
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 24
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      isLabel: true
+      text: "."
+      multiline: false
+      isAllCaps: false
+    }
+    parentid: 600
+  }
+  classname: "CYIActivityIndicatorView"
+  bgcolor {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  properties {
+    key: "componentType"
+    value: "loader"
+  }
+}
+sources {
+  uid: 611
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  width: 640
+  height: 480
+  copy_source: false
+}
+sources {
+  uid: 2
+  srctype: AE_FONT_SRC
+  name: "CabinCondensed-Medium"
+  copy_source: true
+  file_name: "yi_Cabin Condensed-Medium.ttf"
+  style_name: "Medium"
+}

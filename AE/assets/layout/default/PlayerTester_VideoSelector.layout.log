@@ -1,0 +1,29 @@
+activecomp {
+  name: "PlayerTester_VideoSelector"
+  width: 640
+  height: 480
+  defaultcameradistance: 888.88892
+  classname: "CYIScrollingView"
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  properties {
+    key: "layout"
+    value: "CYIColumnLayout"
+  }
+  properties {
+    key: "gravity"
+    value: "left"
+  }
+  properties {
+    key: "padding"
+    value: "20"
+  }
+  properties {
+    key: "componentSubtype"
+    value: "scrolling"
+  }
+}

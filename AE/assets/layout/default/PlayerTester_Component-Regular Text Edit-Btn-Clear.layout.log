@@ -1,0 +1,254 @@
+activecomp {
+  name: "PlayerTester_Component-Regular Text Edit-Btn-Clear"
+  width: 60
+  height: 60
+  defaultcameradistance: 83.333336
+  layer {
+    name: "BG-Black"
+    id: 1027
+    sourceid: 975
+    transform {
+      anchorPoint {
+        x: 30
+        y: 30
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 0
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 1031
+  }
+  layer {
+    name: "BG-Pink"
+    id: 1028
+    sourceid: 1090
+    transform {
+      anchorPoint {
+        x: 30
+        y: 30
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 0
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 1031
+  }
+  layer {
+    name: "X-1"
+    id: 1029
+    sourceid: 995
+    transform {
+      anchorPoint {
+        x: 20
+        y: 4
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 0
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 45
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 1031
+  }
+  layer {
+    name: "X-2"
+    id: 1030
+    sourceid: 259150
+    transform {
+      anchorPoint {
+        x: 20
+        y: 4
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 0
+        y: 0
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 135
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 1031
+  }
+  layer {
+    name: "Scaler"
+    id: 1031
+    sourceid: 1091
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 30
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  classname: "CYIPushButtonView"
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  properties {
+    key: "componentType"
+    value: "button"
+  }
+  properties {
+    key: "componentSubtype"
+    value: "push"
+  }
+}
+sources {
+  uid: 975
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  width: 60
+  height: 60
+  copy_source: false
+}
+sources {
+  uid: 1090
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.87450981140136719
+    green: 0.11372549086809158
+    blue: 0.27450981736183167
+  }
+  width: 60
+  height: 60
+  copy_source: false
+}
+sources {
+  uid: 995
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  width: 40
+  height: 8
+  copy_source: false
+}
+sources {
+  uid: 259150
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+  width: 40
+  height: 8
+  copy_source: false
+}
+sources {
+  uid: 1091
+  srctype: AE_NULL_SRC
+  width: 100
+  height: 100
+  copy_source: false
+}

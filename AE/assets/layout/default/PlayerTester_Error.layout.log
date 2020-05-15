@@ -1,0 +1,119 @@
+activecomp {
+  name: "PlayerTester_Error"
+  width: 350
+  height: 263
+  defaultcameradistance: 486.11111
+  layer {
+    name: "Black Solid 1"
+    id: 692
+    sourceid: 611
+    transform {
+      anchorPoint {
+        x: 320
+        y: 240
+        z: 0
+      }
+      scale {
+        x: 0.55
+        y: 0.55
+        z: 1
+      }
+      position {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0.5
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Error Occured"
+    id: 693
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 81.999977
+        y: 18
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 113.18868
+        y: 71.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 14
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: false
+      boundsWidth: 285
+      boundsHeight: 156
+      isLabel: true
+      text: "Error Occured"
+      multiline: true
+      isAllCaps: false
+    }
+  }
+  bgcolor {
+    alpha: 1
+    red: 1
+    green: 1
+    blue: 1
+  }
+}
+sources {
+  uid: 611
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  width: 640
+  height: 480
+  copy_source: false
+}
+sources {
+  uid: 2
+  srctype: AE_FONT_SRC
+  name: "CabinCondensed-Medium"
+  copy_source: true
+  file_name: "yi_Cabin Condensed-Medium.ttf"
+  style_name: "Medium"
+}

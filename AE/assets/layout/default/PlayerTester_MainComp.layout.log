@@ -1,0 +1,1005 @@
+activecomp {
+  name: "PlayerTester_MainComp"
+  width: 640
+  height: 480
+  defaultcameradistance: 888.88892
+  layer {
+    name: "Background"
+    id: 1
+    sourceid: 618
+    transform {
+      anchorPoint {
+        x: 320
+        y: 240
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 320
+        y: 240
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "VideoSurfaceView"
+    id: 2
+    sourceid: 581
+    transform {
+      anchorPoint {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 205.0428
+        y: 190
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "VideoSurfaceViewMini"
+    id: 3
+    sourceid: 581
+    transform {
+      anchorPoint {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      scale {
+        x: 0.40684411
+        y: 0.40684411
+        z: 1
+      }
+      position {
+        x: 453.04279
+        y: 261
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "SeekControls"
+    id: 4
+    sourceid: 860
+    transform {
+      anchorPoint {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 174.96999
+        y: 133.00894
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 2
+  }
+  layer {
+    name: "Buffering"
+    id: 5
+    sourceid: 599
+    transform {
+      anchorPoint {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 2
+  }
+  layer {
+    name: "AnimateButton"
+    id: 6
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 534.31714
+        y: 130.99437
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Animate"
+    }
+  }
+  layer {
+    name: "BackgroundPlaybackButton"
+    id: 7
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 417.31714
+        y: 131.99437
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "BG Play\r\r"
+    }
+  }
+  layer {
+    name: "HeadphoneJackPauseButton"
+    id: 8
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 417.31714
+        y: 172.99437
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "HJ Pause\r\r"
+    }
+  }
+  layer {
+    name: "VideoControls"
+    id: 9
+    sourceid: 660
+    transform {
+      anchorPoint {
+        x: 320
+        y: 37.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 320
+        y: 373
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Error"
+    id: 10
+    sourceid: 692
+    transform {
+      anchorPoint {
+        x: 175
+        y: 131.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 175
+        y: 130.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    parentid: 2
+  }
+  layer {
+    name: "Capabilities"
+    id: 11
+    sourceid: 717
+    transform {
+      anchorPoint {
+        x: 75
+        y: 150
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 554.31714
+        y: 310.19437
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "VideoStats"
+    id: 12
+    sourceid: 747
+    transform {
+      anchorPoint {
+        x: 250
+        y: 40
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 386
+        y: 435
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "videoURL"
+    id: 13
+    sourceid: 813
+    transform {
+      anchorPoint {
+        x: 315
+        y: 20
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 327.06903
+        y: 32.056259
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "StartTime"
+    id: 14
+    sourceid: 259661
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 420
+        y: 297
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "MaxBitrate"
+    id: 15
+    sourceid: 259260
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 415
+        y: 85
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "MinBufferLength"
+    id: 16
+    sourceid: 259608
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 420
+        y: 213
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "MaxBufferLength"
+    id: 17
+    sourceid: 259621
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 420
+        y: 255
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Seek"
+    id: 18
+    sourceid: 259536
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 529
+        y: 86
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "MuteButton"
+    id: 19
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 419.75
+        y: 335
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Mute"
+    }
+  }
+  layer {
+    name: "placeholder-playerinfo"
+    id: 20
+    sourceid: -1
+    transform {
+      anchorPoint {
+        x: 0
+        y: 0
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 0.82222223
+        z: 1
+      }
+      position {
+        x: 32
+        y: 335.5
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    textinfo {
+      justification: AE_TEXT_LEFT
+      fontSize: 15
+      fontColor {
+        alpha: 1
+        red: 1
+        green: 1
+        blue: 1
+      }
+      fontName: "CabinCondensed-Medium"
+      isPointText: true
+      multiline: false
+      isAllCaps: false
+    }
+  }
+  layer {
+    name: "VideoControls 2"
+    id: 21
+    sourceid: 788
+    transform {
+      anchorPoint {
+        x: 320
+        y: 37.5
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 320
+        y: 432
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "Dark Gray Solid 2"
+    id: 22
+    sourceid: 907
+    transform {
+      anchorPoint {
+        x: 320
+        y: 240
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 320
+        y: 240
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  layer {
+    name: "VideoSelector"
+    id: 23
+    sourceid: 831
+    transform {
+      anchorPoint {
+        x: 320
+        y: 240
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 320
+        y: 240
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 0
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  childtemplates: "PlayerTester_VideoSurfaceView"
+  childtemplates: "PlayerTester_SeekControls"
+  childtemplates: "PlayerTester_Buffering"
+  childtemplates: "PlayerTester_Button"
+  childtemplates: "PlayerTester_VideoControls"
+  childtemplates: "PlayerTester_Error"
+  childtemplates: "PlayerTester_Capabilities"
+  childtemplates: "PlayerTester_VideoStats"
+  childtemplates: "PlayerTester_videoURL"
+  childtemplates: "PlayerTester_StartTime"
+  childtemplates: "PlayerTester_MaxBitrate"
+  childtemplates: "PlayerTester_MinBufferLength"
+  childtemplates: "PlayerTester_MaxBufferLength"
+  childtemplates: "PlayerTester_Seek"
+  childtemplates: "PlayerTester_VideoControls 2"
+  childtemplates: "PlayerTester_VideoSelector"
+}
+sources {
+  uid: 618
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.55198830366134644
+    green: 0.37151181697845459
+    blue: 0.95643383264541626
+  }
+  width: 640
+  height: 480
+  copy_source: false
+}
+sources {
+  uid: 581
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_VideoSurfaceView.layout"
+  width: 350
+  height: 263
+  copy_source: true
+}
+sources {
+  uid: 860
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_SeekControls.layout"
+  width: 350
+  height: 263
+  copy_source: true
+}
+sources {
+  uid: 599
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Buffering.layout"
+  width: 350
+  height: 263
+  copy_source: true
+}
+sources {
+  uid: 622
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Button.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 660
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_VideoControls.layout"
+  width: 640
+  height: 75
+  copy_source: true
+}
+sources {
+  uid: 692
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Error.layout"
+  width: 350
+  height: 263
+  copy_source: true
+}
+sources {
+  uid: 717
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Capabilities.layout"
+  width: 150
+  height: 300
+  copy_source: true
+}
+sources {
+  uid: 747
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_VideoStats.layout"
+  width: 500
+  height: 80
+  copy_source: true
+}
+sources {
+  uid: 813
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_videoURL.layout"
+  width: 630
+  height: 40
+  copy_source: true
+}
+sources {
+  uid: 259661
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_StartTime.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 259260
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_MaxBitrate.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 259608
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_MinBufferLength.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 259621
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_MaxBufferLength.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 259536
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Seek.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 16
+  srctype: AE_FONT_SRC
+  name: "CabinCondensed-Medium"
+  copy_source: true
+  file_name: "yi_Cabin Condensed-Medium.ttf"
+  style_name: "Medium"
+}
+sources {
+  uid: 788
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_VideoControls 2.layout"
+  width: 640
+  height: 75
+  copy_source: true
+}
+sources {
+  uid: 907
+  srctype: AE_SOLID_SRC
+  color {
+    alpha: 1
+    red: 0.17647099494934082
+    green: 0.17647099494934082
+    blue: 0.17647099494934082
+  }
+  width: 640
+  height: 480
+  copy_source: false
+}
+sources {
+  uid: 831
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_VideoSelector.layout"
+  width: 640
+  height: 480
+  copy_source: true
+}

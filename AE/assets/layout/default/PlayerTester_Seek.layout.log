@@ -1,0 +1,102 @@
+activecomp {
+  name: "PlayerTester_Seek"
+  width: 60
+  height: 30
+  defaultcameradistance: 83.333336
+  layer {
+    name: "SeekButton"
+    id: 259536
+    sourceid: 622
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+    properties {
+      key: "text"
+      value: "Seek (Sec)"
+    }
+  }
+  layer {
+    name: "SeekTextEdit"
+    id: 259537
+    sourceid: 4498
+    transform {
+      anchorPoint {
+        x: 30
+        y: 15
+        z: 0
+      }
+      scale {
+        x: 1
+        y: 1
+        z: 1
+      }
+      position {
+        x: 30
+        y: 15
+        z: 0
+      }
+      orientation {
+        x: 0
+        y: 0
+        z: 0
+      }
+      rotationX: 0
+      rotationY: 0
+      rotationZ: 0
+      opacity: 1
+    }
+    acceptsshadows: true
+    acceptslights: true
+    castsshadows: false
+  }
+  bgcolor {
+    alpha: 1
+    red: 0
+    green: 0
+    blue: 0
+  }
+  childtemplates: "PlayerTester_Button"
+  childtemplates: "PlayerTester_SeekTextEdit"
+}
+sources {
+  uid: 622
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_Button.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}
+sources {
+  uid: 4498
+  srctype: AE_COMP_SRC
+  name: "PlayerTester_SeekTextEdit.layout"
+  width: 60
+  height: 30
+  copy_source: true
+}

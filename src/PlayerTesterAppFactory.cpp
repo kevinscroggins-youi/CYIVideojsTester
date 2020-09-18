@@ -1,6 +1,6 @@
 
 #include "AppFactory.h"
-#include "AutomatedPlayerTesterApp.h"
+#include "PlayerTesterApp.h"
 
 #define APP_NAME "PlayerTester"
 
@@ -14,7 +14,7 @@
 
 std::unique_ptr<CYIApp> AppFactory::Create()
 {
-    return std::make_unique<AutomatedPlayerTesterApp>();
+    return std::make_unique<PlayerTesterApp>();
 }
 
 int AppFactory::GetWindowWidth()

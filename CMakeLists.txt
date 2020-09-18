@@ -38,7 +38,7 @@ endif()
 
 set(YI_VERSION_NUMBER 1.0.0.0 CACHE STRING "Build version of the application. This is the version that will be displayed to the end user in the store.")
 set(YI_BUILD_NUMBER "ENG-unversioned" CACHE STRING "Release version number that needs to be incremented for each store submission. For Apple platforms, this is the CFBundleVersion. For Android, this is the Version Code.")
-set(YI_YOUI_ENGINE_VERSION 5.11.0 CACHE STRING "Version required for the You.i Engine.")
+set(YI_YOUI_ENGINE_VERSION 5.18.0 CACHE STRING "Version required for the You.i Engine.")
 set(YI_EXCLUDED_ASSET_FILE_EXTENSIONS ".log,.aep" CACHE STRING "Comma-delimited list of file extensions whose files should be omitted during asset copying.")
 
 yi_print_app_names(YI_PROJECT_NAME YI_PACKAGE_NAME YI_DISPLAY_NAME)
@@ -147,6 +147,7 @@ target_include_directories(${PROJECT_NAME}
     PRIVATE ${YouiEngine_DIR}/templates/mains/src
     PRIVATE ${YI_PLATFORM_INCLUDE_DIRECTORIES_${YI_PLATFORM_UPPER}}
     PRIVATE ${YouiEngine_DIR}/testApps/privateHeaders
+    PRIVATE ${YouiEngine_DIR}/core/dist/src
 )
 # Linking with the You.i Engine library is now as simple as adding the 'youi::engine' target
 # to the 'target_link_libraries' command. Thanks to CMake's feature called Transitive Dependencies,
@@ -157,7 +158,6 @@ target_include_directories(${PROJECT_NAME}
 # is only one target that has to be linked against.
 target_link_libraries(${PROJECT_NAME}
     PRIVATE youi::engine
-    PRIVATE youi::TestCommon
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -187,6 +187,8 @@ source_group("Resources" FILES ${YI_PLATFORM_RESOURCES_${YI_PLATFORM_UPPER}})
 include(Modules/YiConfigureInstrumentedBuild)
 yi_configure_instrumented_build(TARGET ${PROJECT_NAME})
 
+include(Modules/YiConfigureLogging)
+yi_configure_logging(TARGET ${PROJECT_NAME})
 
 include(Modules/YiConfigureWarningsAsErrors)
 yi_configure_warnings_as_errors(TARGET ${PROJECT_NAME})

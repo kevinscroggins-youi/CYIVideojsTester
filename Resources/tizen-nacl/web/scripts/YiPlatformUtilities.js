@@ -5,14 +5,12 @@
 
 "use strict";
 
-function CYIPlatformUtilities() { }
-
-var drmKeySystems = {
+const drmKeySystems = {
     widevine: "com.widevine.alpha",
     playready: "com.microsoft.playready"
 };
 
-var drmKeySystemConfigurations = [
+const drmKeySystemConfigurations = [
     {
         videoCapabilities: [
             {
@@ -21,6 +19,49 @@ var drmKeySystemConfigurations = [
         ]
     }
 ];
+
+class CYIPlatformUtilities {
+    static isDRMTypeSupported(drmType) {
+        drmType = CYIUtilities.trimString(drmType);
+
+        if(CYIUtilities.isEmptyString(drmType)) {
+            return false;
+        }
+
+        drmType = drmType.toLowerCase();
+
+        return !!CYIPlatformUtilities.drmSupport[drmType];
+    }
+
+    static checkDRMSupport() {
+        const drmTypes = Object.keys(drmKeySystems);
+
+        for(let i = 0; i < drmTypes.length; i++) {
+            const drmType = drmTypes[i];
+            const drmKeySystem = drmKeySystems[drmType];
+
+            if(!CYIUtilities.isFunction(navigator.requestMediaKeySystemAccess)) {
+                return;
+            }
+
+            (function(drmType, drmKeySystem) {
+                navigator.requestMediaKeySystemAccess(drmKeySystem, drmKeySystemConfigurations).then(function(access) {
+                    if(!CYIUtilities.isFunction(access.createMediaKeys)) {
+                        return;
+                    }
+
+                    access.createMediaKeys().then(function(keys) {
+                        CYIPlatformUtilities.drmSupport[drmType] = true;
+                    }).catch(function(error) {
+                        console.log(CYIPlatformUtilities.platformName + " does not support creating media keys for " + drmType + " DRM.");
+                    });
+                }).catch(function(error) {
+                    console.log(CYIPlatformUtilities.platformName + " does not support " + drmType + " DRM.");
+                });
+            })(drmType, drmKeySystem);
+        }
+    }
+}
 
 Object.defineProperty(CYIPlatformUtilities, "platformName", {
     value: "Unknown",
@@ -85,45 +126,6 @@ else if(CYIPlatformUtilities.isUWP) {
     CYIPlatformUtilities.platformName = "UWP";
 }
 
-CYIPlatformUtilities.isDRMTypeSupported = function isDRMTypeSupported(drmType) {
-    drmType = CYIUtilities.trimString(drmType);
-
-    if(CYIUtilities.isEmptyString(drmType)) {
-        return false;
-    }
-
-    drmType = drmType.toLowerCase();
-
-    return !!CYIPlatformUtilities.drmSupport[drmType];
-};
-
-CYIPlatformUtilities.checkDRMSupport = function checkDRMSupport() {
-    var drmTypes = Object.keys(drmKeySystems);
-
-    for(var i = 0; i < drmTypes.length; i++) {
-        var drmType = drmTypes[i];
-        var drmKeySystem = drmKeySystems[drmType];
-
-        if(!CYIUtilities.isFunction(navigator.requestMediaKeySystemAccess)) {
-            return;
-        }
-
-        (function(drmType, drmKeySystem) {
-            navigator.requestMediaKeySystemAccess(drmKeySystem, drmKeySystemConfigurations).then(function(access) {
-                if(!CYIUtilities.isFunction(access.createMediaKeys)) {
-                    return;
-                }
-
-                access.createMediaKeys().then(function(keys) {
-                    CYIPlatformUtilities.drmSupport[drmType] = true;
-                }).catch(function(error) {
-                    console.log(CYIPlatformUtilities.platformName + " does not support creating media keys for " + drmType + " DRM.");
-                });
-            }).catch(function(error) {
-                console.log(CYIPlatformUtilities.platformName + " does not support " + drmType + " DRM.");
-            });
-        })(drmType, drmKeySystem);
-    }
-};
-
 CYIPlatformUtilities.checkDRMSupport();
+
+window.CYIPlatformUtilities = CYIPlatformUtilities;

@@ -1,7 +1,7 @@
 function CYIRemoteLogger() { }
 
 CYIRemoteLogger.enabled = false; // flag for enabling remote console debugging using XMLHttpRequest to RESTful API server
-CYIRemoteLogger.address = "192.168.1.64"; // host or ip address of the remote console API server
+CYIRemoteLogger.address = "10.100.123.123"; // host or ip address of the remote console API server
 CYIRemoteLogger.port = 3000; // port the remote console API server is listening on
 CYIRemoteLogger.batchingEnabled = true;
 CYIRemoteLogger.messageIdCounter = 1;
@@ -15,6 +15,7 @@ CYIRemoteLogger.shouldHookPrintLogFunction = false;
 CYIRemoteLogger.originalConsoleLogFunctions = { };
 CYIRemoteLogger.modifiedConsoleLogFunctions = { };
 CYIRemoteLogger.originalPrintLogFunction = null;
+CYIRemoteLogger.originalPrintLogFunctionRequiresTypeArgument = false;
 CYIRemoteLogger.originalHookConsoleLoggingFunction = null;
 CYIRemoteLogger.originalUnhookConsoleLoggingFunction = null;
 CYIRemoteLogger.messageQueue = [];
@@ -27,7 +28,7 @@ CYIRemoteLogger.initialized = false;
 CYIRemoteLogger.logSinkInitialized = false;
 CYIRemoteLogger.metadataHeaders = null;
 CYIRemoteLogger.sessionTimestamp = 0;
-CYIRemoteLogger.version = "1.1.7"; // should match the version on the RESTful API server, but there is backwards and forwards compatibility as well, for now
+CYIRemoteLogger.version = "1.1.10"; // should match the version on the RESTful API server, but there is backwards and forwards compatibility as well, for now
 
 CYIRemoteLogger.initialize = function initialize() {
 	// do not allow the remote logger to be initialized if it is disabled
@@ -40,6 +41,8 @@ CYIRemoteLogger.initialize = function initialize() {
 		return true;
 	}
 
+	CYIRemoteLogger.sendDebugRemoteLog("Initializing Tizen remote logger with remote API address: '" + CYIRemoteLogger.address + ":" + CYIRemoteLogger.port + "'...");
+
 	if(typeof application !== "undefined") {
 		CYIRemoteLogger.printLogFunction = application.printLog;
 		CYIRemoteLogger.legacy = true;
@@ -47,10 +50,6 @@ CYIRemoteLogger.initialize = function initialize() {
 	else if(typeof CYIApplication !== "undefined") {
 		CYIRemoteLogger.printLogFunction = CYILogger.log;
 		CYIRemoteLogger.legacy = false;
-	}
-	else {
-		console.error("Unable to determine main application.");
-		return false;
 	}
 
 	// create unique timestamp for the current session
@@ -60,9 +59,12 @@ CYIRemoteLogger.initialize = function initialize() {
 	CYIRemoteLogger.initializeMetadataHeaders();
 
 	// backup the original printLog and console hooking / unhooking functions
-	CYIRemoteLogger.originalPrintLogFunction = CYIRemoteLogger.legacy ? application.printLog : CYILogger.log;
-	CYIRemoteLogger.originalHookConsoleLoggingFunction = CYIRemoteLogger.legacy ? application.hookConsoleLogging : CYILogger.hookConsoleLogging;
-	CYIRemoteLogger.originalUnhookConsoleLoggingFunction = CYIRemoteLogger.legacy ? application.unhookConsoleLogging : CYILogger.unhookConsoleLogging;
+	if(CYIRemoteLogger.legacy !== null) {
+		CYIRemoteLogger.originalPrintLogFunction = CYIRemoteLogger.legacy ? application.printLog : CYILogger.log;
+		CYIRemoteLogger.originalPrintLogFunctionRequiresTypeArgument = typeof CYILogger !== "undefined" && CYILogger.appendToLogArea instanceof Function;
+		CYIRemoteLogger.originalHookConsoleLoggingFunction = CYIRemoteLogger.legacy ? application.hookConsoleLogging : CYILogger.hookConsoleLogging;
+		CYIRemoteLogger.originalUnhookConsoleLoggingFunction = CYIRemoteLogger.legacy ? application.unhookConsoleLogging : CYILogger.unhookConsoleLogging;
+	}
 
 	// hook logging functions
 	CYIRemoteLogger.hookLoggingFunctions();
@@ -98,7 +100,13 @@ CYIRemoteLogger.initialize = function initialize() {
 	// check if log message batching is enabled
 	if(CYIRemoteLogger.batchingEnabled) {
 		if(CYIRemoteLogger.verbose) {
-			CYIRemoteLogger.originalPrintLogFunction("Message batching enabled, starting message batching timer with " + (CYIRemoteLogger.messageSendIntervalMs / 1000) + "s interval.");
+			var message = "Message batching enabled, starting message batching timer with " + (CYIRemoteLogger.messageSendIntervalMs / 1000) + "s interval.";
+
+			if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+				CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+			}
+
+			CYIRemoteLogger.sendDebugRemoteLog(message);
 		}
 
 		// start a timer to send groups of messages in each request at regular intervals to reduce the amount of network traffic
@@ -113,7 +121,13 @@ CYIRemoteLogger.initialize = function initialize() {
 	}
 	else {
 		if(CYIRemoteLogger.verbose) {
-			CYIRemoteLogger.originalPrintLogFunction("Message batching is disabled, starting message resend timer with " + (CYIRemoteLogger.messageSendIntervalMs / 1000) + "s interval.");
+			var message = "Message batching is disabled, starting message resend timer with " + (CYIRemoteLogger.messageSendIntervalMs / 1000) + "s interval.";
+
+			if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+				CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+			}
+
+			CYIRemoteLogger.sendDebugRemoteLog(message);
 		}
 
 		// start a timer to automatically re-send messages which were not received at regular intervals to ensure that connectivity interruptions do not prevent messages from getting through
@@ -132,6 +146,8 @@ CYIRemoteLogger.initialize = function initialize() {
 			name: "initialized"
 		});
 	}
+
+	CYIRemoteLogger.sendDebugRemoteLog("Tizen remote logger initialized successfully!");
 
 	return true;
 };
@@ -159,7 +175,13 @@ CYIRemoteLogger.initializeMetadataHeaders = function initializeMetadataHeaders()
 		CYIRemoteLogger.metadataHeaders["Application-Identifier"] = tizen.application.getCurrentApplication().appInfo.id;
 	}
 	catch(error) {
-		CYIRemoteLogger.printLogFunction("Failed to retrieve device metadata: " + error.message);
+		var message = "Failed to retrieve device metadata: " + error.message;
+
+		if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+			CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+		}
+
+		CYIRemoteLogger.sendDebugRemoteLog(message);
 	}
 };
 
@@ -193,7 +215,13 @@ CYIRemoteLogger.hookConsoleLogging = function hookConsoleLogging() {
 	}
 
 	if(CYIRemoteLogger.verbose) {
-		CYIRemoteLogger.originalPrintLogFunction("Injecting remote log hooks into original console logging functions...");
+		var message = "Injecting remote log hooks into original console logging functions...";
+
+		if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+			CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+		}
+
+		CYIRemoteLogger.sendDebugRemoteLog(message);
 	}
 
 	var consoleLogType = null;
@@ -219,7 +247,7 @@ CYIRemoteLogger.hookConsoleLogging = function hookConsoleLogging() {
 				CYIRemoteLogger.modifiedConsoleLogFunctions[consoleLogType].apply(console, arguments);
 
 				// invoke the remote logging function with the same arguments
-				CYIRemoteLogger.remoteLog(consoleLogType, arguments);
+				CYIRemoteLogger.remoteLog(consoleLogType, Array.prototype.slice.call(arguments));
 			}
 		})(consoleLogType);
 	}
@@ -229,7 +257,7 @@ CYIRemoteLogger.hookConsoleLogging = function hookConsoleLogging() {
 
 CYIRemoteLogger.hookPrintLogFunction = function hookPrintLogFunction() {
 	// do not allow printLog function to be hooked if disabled or already hooked
-	if(!CYIRemoteLogger.enabled || CYIRemoteLogger.printLogHooked) {
+	if(!CYIRemoteLogger.enabled || CYIRemoteLogger.printLogHooked || !(CYIRemoteLogger.originalPrintLogFunction instanceof Function)) {
 		return;
 	}
 
@@ -239,22 +267,26 @@ CYIRemoteLogger.hookPrintLogFunction = function hookPrintLogFunction() {
 	// check if the console logging functions have not already been hooked
 	if(CYIRemoteLogger.shouldHookPrintLogFunction) {
 		if(CYIRemoteLogger.verbose) {
-			CYIRemoteLogger.originalPrintLogFunction("Console log functions not already hooked, injecting remote logging into application printLog function.");
+			var message = "Console log functions not already hooked, injecting remote logging into application printLog function.";
+
+			if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+				CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+			}
+
+			CYIRemoteLogger.sendDebugRemoteLog(message);
 		}
 
 		// assume that the printLog function does not pipe to the standard console logging functions, so pipe its output to the remote log function
 		function printLog() {
-			// invoke the original printLog function
-			CYIRemoteLogger.originalPrintLogFunction.apply(CYIRemoteLogger.legacy ? application : CYILogger, arguments);
-
 			var logType = "debug";
+			var doNotRemoteLog = false;
 
 			// prevent duplicate logs
 			if(arguments.length !== 0 && typeof arguments[0] === "string") {
 				var logMessage = arguments[0].trim();
 
 				if(logMessage.indexOf("JavaScript", 2) === 2) {
-					return;
+					doNotRemoteLog = true;
 				}
 
 				if(logMessage.indexOf("I/") === 0) {
@@ -268,8 +300,20 @@ CYIRemoteLogger.hookPrintLogFunction = function hookPrintLogFunction() {
 				}
 			}
 
+			// invoke the original printLog function
+			if(CYIRemoteLogger.originalPrintLogFunctionRequiresTypeArgument) {
+				CYIRemoteLogger.originalPrintLogFunction.apply(CYILogger, [logType, arguments]);
+			}
+			else {
+				CYIRemoteLogger.originalPrintLogFunction.apply(CYIRemoteLogger.legacy ? application : CYILogger, arguments);
+			}
+
+			if(doNotRemoteLog) {
+				return;
+			}
+
 			// invoke the remote logging function with the same arguments
-			CYIRemoteLogger.remoteLog(logType, arguments);
+			CYIRemoteLogger.remoteLog(logType, Array.prototype.slice.call(arguments));
 		}
 
 		if(CYIRemoteLogger.legacy) {
@@ -281,7 +325,13 @@ CYIRemoteLogger.hookPrintLogFunction = function hookPrintLogFunction() {
 	}
 	else {
 		if(CYIRemoteLogger.verbose) {
-			CYIRemoteLogger.originalPrintLogFunction("Console log functions already hooked, not injecting remote logging into application printLog function.");
+			var message = "Console log functions already hooked, not injecting remote logging into application printLog function.";
+
+			if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+				CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+			}
+
+			CYIRemoteLogger.sendDebugRemoteLog(message);
 		}
 	}
 
@@ -301,14 +351,20 @@ CYIRemoteLogger.unhookLoggingFunctions = function unhookLoggingFunctions() {
 
 CYIRemoteLogger.unhookPrintLogFunction = function unhookPrintLogFunction() {
 	// do not allow console logging to be unhooked if disabled or not hooked
-	if(!CYIRemoteLogger.initialized || !CYIRemoteLogger.enabled || !CYIRemoteLogger.printLogHooked) {
+	if(!CYIRemoteLogger.initialized || !CYIRemoteLogger.enabled || !CYIRemoteLogger.printLogHooked || !(CYIRemoteLogger.originalPrintLogFunction instanceof Function)) {
 		return;
 	}
 
 	// restore original printLog function if it was hooked by the remote logger
 	if(CYIRemoteLogger.shouldHookPrintLogFunction) {
 		if(CYIRemoteLogger.verbose) {
-			CYIRemoteLogger.originalPrintLogFunction("Restoring printLog to original function.");
+			var message = "Restoring printLog to original function.";
+
+			if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+				CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+			}
+
+			CYIRemoteLogger.sendDebugRemoteLog(message);
 		}
 
 		if(CYIRemoteLogger.legacy) {
@@ -329,7 +385,13 @@ CYIRemoteLogger.unhookConsoleLogging = function unhookConsoleLogging() {
 	}
 
 	if(CYIRemoteLogger.verbose) {
-		CYIRemoteLogger.originalPrintLogFunction("Unhooking remote logging from console logging functions...");
+		var message = "Unhooking remote logging from console logging functions...";
+
+		if(CYIRemoteLogger.originalPrintLogFunction instanceof Function) {
+			CYIRemoteLogger.callOriginalPrintLogFunction("debug", message);
+		}
+
+		CYIRemoteLogger.sendDebugRemoteLog(message);
 	}
 
 	// restore original console logging functions
@@ -378,6 +440,16 @@ CYIRemoteLogger.backupModifiedConsoleLogFunctions = function backupModifiedConso
 };
 
 CYIRemoteLogger.formatMessage = function formatMessage(args) {
+	// make sure arguments is an array or array-like if it is a string
+	if(typeof args === "string") {
+		args = [args];
+	}
+
+	// verifies that arguments is an array
+	if(!Array.isArray(args)) {
+		return "";
+	}
+
 	var formattedMessage = "";
 
 	for(var i = 0; i < args.length; i++) {
@@ -385,18 +457,77 @@ CYIRemoteLogger.formatMessage = function formatMessage(args) {
 			formattedMessage += " ";
 		}
 
-		formattedMessage += CYIUtilities.toString(args[i]);
+		formattedMessage += CYIRemoteLogger.toString(args[i]);
 	}
 
 	return formattedMessage.trim();
 };
 
-CYIRemoteLogger.createLog = function createLogData(type, args) {
-	// verifies that arguments is a type of list
-	if(args === null || !(args instanceof Object) || (args instanceof Function) || args.length === 0) {
-		return null;
+CYIRemoteLogger.toString = function toString(value) {
+	if(value === undefined) {
+		return "undefined";
+	}
+	else if(value === null) {
+		return "null";
+	}
+	else if(typeof value === "string") {
+		return value;
+	}
+	else if(value === Infinity) {
+		return "Infinity";
+	}
+	else if(value === -Infinity) {
+		return "-Infinity";
+	}
+	else if(typeof value === "number" && isNaN(value)) {
+		return "NaN";
+	}
+	else if(value instanceof Date) {
+		return value.toString();
+	}
+	else if(value instanceof RegExp) {
+		var flags = "";
+
+		for(var flag in regExpFlags) {
+			if(value[flag]) {
+				flags += regExpFlags[flag];
+			}
+		}
+
+		return "/" + value.source + "/" + flags;
+	}
+	else if(value instanceof Function) {
+		return value.toString();
+	}
+	else if(value instanceof Error) {
+		if(value.stack !== undefined && value.stack !== null) {
+			return value.stack;
+		}
+
+		return value.message;
 	}
 
+	return JSON.stringify(value);
+};
+
+CYIRemoteLogger.callOriginalPrintLogFunction = function callOriginalPrintLogFunction(type, message) {
+	if(CYIRemoteLogger.originalPrintLogFunctionRequiresTypeArgument) {
+		if(typeof message === "string") {
+			message = [message];
+		}
+
+		if(!Array.isArray(message)) {
+			return;
+		}
+
+		CYIRemoteLogger.originalPrintLogFunction(type, message);
+	}
+	else {
+		CYIRemoteLogger.originalPrintLogFunction(message);
+	}
+};
+
+CYIRemoteLogger.createLog = function createLogData(type, args) {
 	if(type === "log") {
 		type = "debug";
 	}
@@ -652,9 +783,47 @@ CYIRemoteLogger.sendRequest = function sendRequest(options, callback) {
 
 CYIRemoteLogger.backupOriginalConsoleLogFunctions();
 
-document.addEventListener("DOMContentLoaded", function() {
-	// initialize the remote logger after the tizen logging hooks have been initialized (this will miss some logs during the initialization process)
-	setTimeout(function() {
-		CYIRemoteLogger.initialize();
+if(typeof CYIMain !== "undefined") {
+	CYIRemoteLogger.initialize();
+}
+else {
+	window.addEventListener("DOMContentLoaded", function(event) {
+		// initialize the remote logger after the tizen logging hooks have been initialized (this will miss some logs during the initialization process)
+		setTimeout(function() {
+			CYIRemoteLogger.initialize();
+		}, 0);
 	});
+}
+
+window.addEventListener("error", function(event) {
+	if(event instanceof ErrorEvent) {
+		var error = event.message;
+
+		if(event.error !== undefined && event.error !== null) {
+			error = event.error;
+		}
+
+		if(error instanceof Error) {
+			CYIRemoteLogger.remoteLog("error", "Unhandled Error: " + error.message);
+			CYIRemoteLogger.remoteLog("error", error.stack);
+		}
+		else {
+			CYIRemoteLogger.remoteLog("error", "Unhandled Error: " + event.message);
+			CYIRemoteLogger.remoteLog("error", "at " + event.filename + ":" + event.lineno + (isNaN(event.colno) ? "" : event.colno));
+		}
+	}
+
+	return false;
+});
+
+window.addEventListener("unhandledrejection", function(event) {
+	if(event instanceof PromiseRejectionEvent) {
+		var reason = event.reason;
+
+		if(reason instanceof Object) {
+			CYIRemoteLogger.remoteLog("error", "Unhandled Promise Rejection: " + reason.message);
+		}
+	}
+
+	return false;
 });

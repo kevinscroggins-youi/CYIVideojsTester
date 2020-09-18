@@ -1,4 +1,4 @@
-/*! @name videojs-contrib-eme @version 3.5.4 @license Apache-2.0 */
+/*! @name videojs-contrib-eme @version 3.7.0 @license Apache-2.0 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('global/document'), require('video.js'), require('global/window')) :
   typeof define === 'function' && define.amd ? define(['exports', 'global/document', 'video.js', 'global/window'], factory) :
@@ -8,6 +8,24 @@
   document = document && document.hasOwnProperty('default') ? document['default'] : document;
   videojs = videojs && videojs.hasOwnProperty('default') ? videojs['default'] : videojs;
   window = window && window.hasOwnProperty('default') ? window['default'] : window;
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
 
   var stringToUint16Array = function stringToUint16Array(string) {
     // 2 bytes for each char
@@ -118,37 +136,75 @@
         return;
       }
 
+      if (response.statusCode >= 400 && response.statusCode <= 599) {
+        // Pass an empty object as the error to use the default code 5 error message
+        callback({});
+        return;
+      }
+
       callback(null, responseBody);
     });
   };
 
+  /**
+   * Returns an array of MediaKeySystemConfigurationObjects provided in the keySystem
+   * options.
+   *
+   * @see {@link https://www.w3.org/TR/encrypted-media/#dom-mediakeysystemconfiguration|MediaKeySystemConfigurationObject}
+   *
+   * @param {Object} keySystemOptions
+   *        Options passed into videojs-contrib-eme for a specific keySystem
+   * @return {Object[]}
+   *         Array of MediaKeySystemConfigurationObjects
+   */
+
+  var getSupportedConfigurations = function getSupportedConfigurations(keySystemOptions) {
+    if (keySystemOptions.supportedConfigurations) {
+      return keySystemOptions.supportedConfigurations;
+    } // TODO use initDataTypes when appropriate
+
+
+    var supportedConfiguration = {};
+    var audioContentType = keySystemOptions.audioContentType;
+    var audioRobustness = keySystemOptions.audioRobustness;
+    var videoContentType = keySystemOptions.videoContentType;
+    var videoRobustness = keySystemOptions.videoRobustness;
+    var persistentState = keySystemOptions.persistentState;
+
+    if (audioContentType || audioRobustness) {
+      supportedConfiguration.audioCapabilities = [_extends({}, audioContentType ? {
+        contentType: audioContentType
+      } : {}, audioRobustness ? {
+        robustness: audioRobustness
+      } : {})];
+    }
+
+    if (videoContentType || videoRobustness) {
+      supportedConfiguration.videoCapabilities = [_extends({}, videoContentType ? {
+        contentType: videoContentType
+      } : {}, videoRobustness ? {
+        robustness: videoRobustness
+      } : {})];
+    }
+
+    if (persistentState) {
+      supportedConfiguration.persistentState = persistentState;
+    }
+
+    return [supportedConfiguration];
+  };
   var getSupportedKeySystem = function getSupportedKeySystem(keySystems) {
     // As this happens after the src is set on the video, we rely only on the set src (we
     // do not change src based on capabilities of the browser in this plugin).
     var promise;
     Object.keys(keySystems).forEach(function (keySystem) {
-      // TODO use initDataTypes when appropriate
-      var systemOptions = {};
-      var audioContentType = keySystems[keySystem].audioContentType;
-      var videoContentType = keySystems[keySystem].videoContentType;
-
-      if (audioContentType) {
-        systemOptions.audioCapabilities = [{
-          contentType: audioContentType
-        }];
-      }
-
-      if (videoContentType) {
-        systemOptions.videoCapabilities = [{
-          contentType: videoContentType
-        }];
-      }
+      var supportedConfigurations = getSupportedConfigurations(keySystems[keySystem]);
 
       if (!promise) {
-        promise = window.navigator.requestMediaKeySystemAccess(keySystem, [systemOptions]);
+        promise = window.navigator.requestMediaKeySystemAccess(keySystem, supportedConfigurations);
       } else {
         promise = promise.catch(function (e) {
-          return window.navigator.requestMediaKeySystemAccess(keySystem, [systemOptions]);
+          return window.navigator.requestMediaKeySystemAccess(keySystem, supportedConfigurations);
         });
       }
     });
@@ -218,6 +274,33 @@
       });
     });
   };
+  /*
+   * Creates a new media key session if media keys are available, otherwise queues the
+   * session creation for when the media keys are available.
+   *
+   * @see {@link https://www.w3.org/TR/encrypted-media/#dom-mediakeysession|MediaKeySession}
+   * @see {@link https://www.w3.org/TR/encrypted-media/#dom-mediakeys|MediaKeys}
+   *
+   * @function addSession
+   * @param {Object} video
+   *        Target video element
+   * @param {string} initDataType
+   *        The type of init data provided
+   * @param {Uint8Array} initData
+   *        The media's init data
+   * @param {Object} options
+   *        Options provided to the plugin for this key system
+   * @param {function()} [getLicense]
+   *        User provided function to retrieve a license
+   * @param {function()} removeSession
+   *        Function to remove the persisted session on key expiration so that a new session
+   *        may be created
+   * @param {Object} eventBus
+   *        Event bus for any events pertinent to users
+   * @return {Promise}
+   *         A resolved promise if session is waiting for media keys, or a promise for the
+   *         session creation if media keys are available
+   */
 
   var addSession = function addSession(_ref2) {
     var video = _ref2.video,
@@ -242,19 +325,40 @@
 
     video.pendingSessionData.push({
       initDataType: initDataType,
-      initData: initData
+      initData: initData,
+      options: options,
+      getLicense: getLicense,
+      removeSession: removeSession,
+      eventBus: eventBus
     });
     return Promise.resolve();
   };
+  /*
+   * Given media keys created from a key system access object, check for any session data
+   * that was queued and create new sessions for each.
+   *
+   * @see {@link https://www.w3.org/TR/encrypted-media/#dom-mediakeysystemaccess|MediaKeySystemAccess}
+   * @see {@link https://www.w3.org/TR/encrypted-media/#dom-mediakeysession|MediaKeySession}
+   * @see {@link https://www.w3.org/TR/encrypted-media/#dom-mediakeys|MediaKeys}
+   *
+   * @function addPendingSessions
+   * @param {Object} video
+   *        Target video element
+   * @param {string} [certificate]
+   *        The server certificate (if used)
+   * @param {Object} createdMediaKeys
+   *        Media keys to use for session creation
+   * @return {Promise}
+   *         A promise containing new session creations and setting of media keys on the
+   *         video object
+   */
 
-  var setMediaKeys = function setMediaKeys(_ref3) {
+  var addPendingSessions = function addPendingSessions(_ref3) {
     var video = _ref3.video,
         certificate = _ref3.certificate,
-        createdMediaKeys = _ref3.createdMediaKeys,
-        options = _ref3.options,
-        getLicense = _ref3.getLicense,
-        removeSession = _ref3.removeSession,
-        eventBus = _ref3.eventBus;
+        createdMediaKeys = _ref3.createdMediaKeys;
+    // save media keys on the video element to act as a reference for other functions so
+    // that they don't recreate the keys
     video.mediaKeysObject = createdMediaKeys;
     var promises = [];
 
@@ -268,10 +372,10 @@
         mediaKeys: video.mediaKeysObject,
         initDataType: data.initDataType,
         initData: data.initData,
-        options: options,
-        getLicense: getLicense,
-        removeSession: removeSession,
-        eventBus: eventBus
+        options: data.options,
+        getLicense: data.getLicense,
+        removeSession: data.removeSession,
+        eventBus: data.eventBus
       }));
     }
 
@@ -300,6 +404,12 @@
       }, function (err, response, responseBody) {
         if (err) {
           callback(err);
+          return;
+        }
+
+        if (response.statusCode >= 400 && response.statusCode <= 599) {
+          // Pass an empty object as the error to use the default code 5 error message
+          callback({});
           return;
         }
 
@@ -384,14 +494,10 @@
       }).then(function () {
         return keySystemAccess.createMediaKeys();
       }).then(function (createdMediaKeys) {
-        return setMediaKeys({
+        return addPendingSessions({
           video: video,
           certificate: certificate,
-          createdMediaKeys: createdMediaKeys,
-          options: options,
-          getLicense: promisifyGetLicense(keySystemOptions.getLicense, eventBus),
-          removeSession: removeSession,
-          eventBus: eventBus
+          createdMediaKeys: createdMediaKeys
         });
       }).catch(function (err) {
         // if we have a specific error message, use it, otherwise show a more
@@ -552,6 +658,12 @@
       }, function (err, response, responseBody) {
         if (err) {
           callback(err);
+          return;
+        }
+
+        if (response.statusCode >= 400 && response.statusCode <= 599) {
+          // Pass an empty object as the error to use the default code 5 error message
+          callback({});
           return;
         }
 
@@ -879,7 +991,7 @@
 
   var emeErrorHandler = function emeErrorHandler(player) {
     return function (objOrErr) {
-      var message = objOrErr ? objOrErr.message || objOrErr : null;
+      var message = typeof objOrErr === 'string' ? objOrErr : objOrErr && objOrErr.message || null;
       player.error({
         // MEDIA_ERR_ENCRYPTED is code 5
         code: 5,
@@ -987,7 +1099,7 @@
       * @param    {Object} [emeOptions={}]
       *           An object of eme plugin options.
       * @param    {Function} [callback=function(){}]
-      * @param    {Boolean} [suppressErrorIfPossible=false]
+      * @param    {boolean} [suppressErrorIfPossible=false]
       */
       initializeMediaKeys: function initializeMediaKeys(emeOptions, callback, suppressErrorIfPossible) {
         if (emeOptions === void 0) {

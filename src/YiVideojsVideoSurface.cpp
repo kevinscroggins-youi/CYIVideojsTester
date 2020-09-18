@@ -1,6 +1,6 @@
-#include "YiVideojsVideoSurface.h"
+#include "player/YiVideojsVideoSurface.h"
 
-#include "YiVideojsVideoPlayerPriv.h"
+#include "player/YiVideojsVideoPlayerPriv.h"
 
 #define LOG_TAG "CYIVideojsVideoSurface"
 

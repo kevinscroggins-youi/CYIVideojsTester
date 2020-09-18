@@ -1,7 +1,7 @@
-#include "YiVideojsVideoPlayer.h"
+#include "player/YiVideojsVideoPlayer.h"
 
-#include "YiVideojsVideoPlayerPriv.h"
-#include "YiVideojsVideoSurface.h"
+#include "player/YiVideojsVideoPlayerPriv.h"
+#include "player/YiVideojsVideoSurface.h"
 
 #include <platform/YiWebBridgeLocator.h>
 #include <player/YiPlayReadyDRMConfiguration.h>
@@ -58,12 +58,9 @@ CYIString DRMSchemeToString(CYIAbstractVideoPlayer::DRMScheme drmScheme)
             return "PlayReady";
         }
         case CYIAbstractVideoPlayer::DRMScheme::WidevineModular:
-        {
-            return "WidevineModular";
-        }
         case CYIAbstractVideoPlayer::DRMScheme::WidevineModularCustomRequest:
         {
-            return "WidevineModularCustomRequest";
+            return "Widevine";
         }
     }
 
@@ -1005,9 +1002,9 @@ void CYIVideojsVideoPlayerPriv::AddDRMConfigurationToValue(CYIAbstractVideoPlaye
 
     if (pDRMConfiguration->GetScheme() == CYIAbstractVideoPlayer::DRMScheme::PlayReady || pDRMConfiguration->GetScheme() == CYIAbstractVideoPlayer::DRMScheme::WidevineModular)
     {
-        CYIPlayReadyDRMConfiguration *pPlayReadyDRMConfiguration = dynamic_cast<CYIPlayReadyDRMConfiguration *>(pDRMConfiguration);
+        CYILicenseAcquisitionDRMConfiguration *pLicenseAcquisitionDRMConfiguration = dynamic_cast<CYILicenseAcquisitionDRMConfiguration *>(pDRMConfiguration);
         yi::rapidjson::Value drmConfigurationValue(yi::rapidjson::kObjectType);
-        const CYIUrl licenseAcquisitionUrl = pPlayReadyDRMConfiguration->GetLicenseAcquisitionUrl();
+        const CYIUrl licenseAcquisitionUrl = pLicenseAcquisitionDRMConfiguration->GetLicenseAcquisitionUrl();
 
         if (!licenseAcquisitionUrl.IsEmpty())
         {
@@ -1022,7 +1019,13 @@ void CYIVideojsVideoPlayerPriv::AddDRMConfigurationToValue(CYIAbstractVideoPlaye
             yi::rapidjson::Value drmSchemeValue(DRMSchemeToString(pDRMConfiguration->GetScheme()).GetData(), allocator);
             drmConfigurationValue.AddMember(yi::rapidjson::StringRef("type"), drmSchemeValue, allocator);
 
-            const std::map<CYIString, CYIString> &licenseAcquisitionHeaders = pPlayReadyDRMConfiguration->GetLicenseAcquisitionHeaders();
+            if (pDRMConfiguration->GetScheme() == CYIAbstractVideoPlayer::DRMScheme::WidevineModular ||
+                pDRMConfiguration->GetScheme() == CYIAbstractVideoPlayer::DRMScheme::WidevineModularCustomRequest)
+            {
+                drmConfigurationValue.AddMember(yi::rapidjson::StringRef("custom"), yi::rapidjson::Value(pDRMConfiguration->GetScheme() == CYIAbstractVideoPlayer::DRMScheme::WidevineModularCustomRequest), allocator);
+            }
+
+            const std::map<CYIString, CYIString> &licenseAcquisitionHeaders = pLicenseAcquisitionDRMConfiguration->GetLicenseAcquisitionHeaders();
 
             if (!licenseAcquisitionHeaders.empty())
             {

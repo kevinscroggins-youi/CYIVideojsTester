@@ -1,8 +1,8 @@
 #ifndef _YI_VIDEOJS_VIDEO_PLAYER_PRIV_H_
 #define _YI_VIDEOJS_VIDEO_PLAYER_PRIV_H_
 
-#include "YiVideojsVideoPlayer.h"
-#include "YiVideojsVideoSurface.h"
+#include "player/YiVideojsVideoPlayer.h"
+#include "player/YiVideojsVideoSurface.h"
 
 #include <platform/YiWebMessagingBridge.h>
 #include <utility/YiRapidJSONUtility.h>
